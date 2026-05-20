@@ -19,7 +19,7 @@ class TestProductAPI:
         response=requests.get(self.base_url+Routes.GET_ALL_PRODUCTS)
         assert response.status_code==200
         data=response.json()
-        print(json.dumps(data,indent=3))
+        #print(json.dumps(data,indent=3))
         assert len(data)>0
 
     def test_single_product_by_id(self):
@@ -28,21 +28,21 @@ class TestProductAPI:
         response=requests.get(endpoint)
         assert response.status_code==200
         data=response.json()
-        print(json.dumps(data,indent=3))
+        # print(json.dumps(data,indent=3))
 
     def test_get_product_limits(self):
         endpoint = self.base_url + Routes.GET_PRODUCTS_WITH_LIMIT.format(limit=5)
         response = requests.get(endpoint)
         assert response.status_code == 200
         data = response.json()
-        print(json.dumps(data, indent=3))
+        # print(json.dumps(data, indent=3))
 
     def test_get_sorted_product_desc(self):
         endpoint = self.base_url + Routes.GET_PRODUCTS_SORTED.format(order="desc")
         response = requests.get(endpoint)
         assert response.status_code == 200
         data = response.json()
-        print(json.dumps(data, indent=3))
+        # print(json.dumps(data, indent=3))
         ids = [item['id'] for item in data]
         assert ids== sorted(ids,reverse=True)
 
@@ -51,7 +51,7 @@ class TestProductAPI:
         response = requests.get(endpoint)
         assert response.status_code == 200
         data = response.json()
-        print(json.dumps(data, indent=3))
+        # print(json.dumps(data, indent=3))
         ids = [item['id'] for item in data]
         assert ids== sorted(ids)
 
@@ -60,19 +60,19 @@ class TestProductAPI:
         response = requests.get(endpoint)
         assert response.status_code == 200
         data = response.json()
-        print(json.dumps(data, indent=3))
+        # print(json.dumps(data, indent=3))
 
     def test_get_products_by_category(self):
         endpoint=self.base_url+Routes.GET_PRODUCTS_BY_CATEGORY.format(category=self.category)
         response = requests.get(endpoint)
         assert response.status_code == 200
         data = response.json()
-        print(json.dumps(data, indent=3))
+        # print(json.dumps(data, indent=3))
 
     def test_add_product(self):
         endpoint= self.base_url+Routes.CREATE_PRODUCT
         json=self.payload
-        print("\nSender payload : \n"+str(json))
+        # print("\nSender payload : \n"+str(json))
         response=requests.post(endpoint,json.__dict__)
         data = response.json()
         assert response.status_code == 201
@@ -83,12 +83,12 @@ class TestProductAPI:
         product_id=self.config.get_property("productId")
         endpoint = self.base_url + Routes.UPDATE_PRODUCT.format(id=product_id)
         json=self.payload
-        print("\nSender payload : \n" + str(json))
+        # print("\nSender payload : \n" + str(json))
         response = requests.put(endpoint, json.__dict__)
         data = response.json()
         assert response.status_code == 200
         assert data['title'] == self.payload.__dict__["title"]
-        print(str(response))
+        # print(str(response))
 
     @pytest.mark.dependency(depends=["add_product"])
     def test_delete_product(self):
@@ -96,5 +96,5 @@ class TestProductAPI:
         endpoint=self.base_url+Routes.DELETE_PRODUCT.format(id=product_id)
         response=requests.delete(endpoint)
         data=response.json()
-        print(json.dumps(data,indent=4))
+        # print(json.dumps(data,indent=4))
         assert response.status_code==200
