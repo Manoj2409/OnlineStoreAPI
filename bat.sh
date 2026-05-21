@@ -50,15 +50,24 @@ python -m pytest -s -v \
     --html="$PYTEST_HTML" --self-contained-html \
     testCases/
 
+# local allure generation
+## ====================================================
+## Step 6: Generate and open Allure report
+## ====================================================
+#if command -v allure >/dev/null 2>&1; then
+#    echo "Generating and opening Allure report..."
+#    allure generate "$ALLURE_RESULTS" -o "$ALLURE_HTML" --clean
+#    allure open "$ALLURE_HTML"
+#else
+#    echo "Allure CLI is not installed. Skipping Allure HTML generation."
+#    echo "Install it with: brew install allure"
+#    echo "Pytest HTML report generated at: $PYTEST_HTML"
+#fi
 # ====================================================
-# Step 6: Generate and open Allure report
+
+# Step 6: Skip HTML generation in Jenkins
+
 # ====================================================
-if command -v allure >/dev/null 2>&1; then
-    echo "Generating and opening Allure report..."
-    allure generate "$ALLURE_RESULTS" -o "$ALLURE_HTML" --clean
-    allure open "$ALLURE_HTML"
-else
-    echo "Allure CLI is not installed. Skipping Allure HTML generation."
-    echo "Install it with: brew install allure"
-    echo "Pytest HTML report generated at: $PYTEST_HTML"
-fi
+
+echo "Allure results generated at: $ALLURE_RESULTS"
+echo "Jenkins Allure plugin will generate the report"
