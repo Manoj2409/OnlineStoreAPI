@@ -12,8 +12,6 @@ class Routes:
     UPDATE_PRODUCT = "/products/{id}"
     DELETE_PRODUCT = "/products/{id}"
 
-    # Backward-compatible alias for the misspelled name used in class examples.
-    GET_ALL_RPODUCTS = GET_ALL_PRODUCTS
 
     # Cart
     GET_ALL_CARTS = "/carts"
@@ -34,4 +32,3 @@ class Routes:
     CREATE_USER = "/users"
     UPDATE_USER = "/users/{id}"
     DELETE_USER = "/users/{id}"
-
