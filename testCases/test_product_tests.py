@@ -69,6 +69,7 @@ class TestProductAPI:
         data = response.json()
         # print(json.dumps(data, indent=3))
 
+    @pytest.mark.dependency(name="add_product")
     def test_add_product(self):
         endpoint= self.base_url+Routes.CREATE_PRODUCT
         json=self.payload

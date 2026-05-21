@@ -5,8 +5,11 @@ xmltodict
 lxml
 jsonschema
 requests-oauthlib
+openpyxl
 faker
 allure-pytest
 pytest-html
 pytest-xdist
 pytest-order
+pytest-dependency
+pytest-rerunfailures

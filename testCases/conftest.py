@@ -1,13 +1,14 @@
-import pytest
-from routes.Routes import Routes
-from utils import ConfigReader
 import logging
 import os
+
+import pytest
 import requests
 
+from routes.Routes import Routes
 from utils.ConfigReader import ReadConfig
 
 LOG_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "logs", "test_logging.log"))
+os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
 logging.basicConfig(
    filename=LOG_FILE,
    level=logging.DEBUG,
@@ -44,3 +45,5 @@ def setup():
     requests.Session.request = custom_request
 
     yield {"base_url":Routes.BASE_URL,"config_reader":ReadConfig}
+
+    requests.Session.request = original_request
